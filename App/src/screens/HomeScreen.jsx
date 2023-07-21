@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/native';
 
 //icons
 import { AntDesign } from '@expo/vector-icons';
 //assets
-import { profile } from '../../assets';
 //components
 import Header from '../components/Header';
 import Project_Card from '../components/Project_Card';
-import Task_Card from '../components/Task';
+import Task_Card from '../components/Task_Card';
 
 const HomeScreen = () => {
+  const navigation =useNavigation();
   const [search_value,set_search_value]=useState('');
 
   return (
@@ -30,18 +31,26 @@ const HomeScreen = () => {
       {/**Search Component ends here*/}
 
       {/**Projects data starts here */}
-      <View className='w-full h-80 space-y-2 '>
+      <View className='w-full space-y-2 '>
         <View className='flex-row w-full justify-between items-center mt-4'>
           <Text className='text-2xl font-medium text-secondary-color-2'>Projects</Text>
-          <Text className='text-sm font-medium text-secondary-color-2'>see all</Text>
+          <Text className='text-sm font-medium text-secondary-color-2' onPress={(()=>{navigation.navigate("Projects")})}>see all</Text>
         </View>
         <ScrollView 
           horizontal
           className='flex-row space-x-2'
+          showsHorizontalScrollIndicator={false}
         >
-          {projects?.map((project)=>{
+          {projects?.map((project,index)=>{
             return(
-              <Project_Card project={project} key={project?.id}/>
+              <Project_Card 
+                project={project} 
+                key={project?.id} 
+                componentbg={index%2 == 0 ? '#E9BB99' : '#C6B6F3'}
+                focus_bg={index%2 == 0 ? '#EB843A' : '#714DD9'}
+                progress_bar_unfilled_bg={'#FFFFFF'}
+                width={250}
+              />
             )
           })}
         </ScrollView>
@@ -54,15 +63,15 @@ const HomeScreen = () => {
             <Text className='text-2xl font-medium text-secondary-color-2'>Today tasks</Text>
             <Text className='text-sm font-medium text-secondary-color-2'>see all</Text>
           </View>
-          <ScrollView>
+          <View>
             {tasks?.map((task)=>{
               return(
                 <Task_Card task={task} key={task?.id}/>
               )
             })}
-          </ScrollView>
+          </View>
       </View>
-          {/**todays data ends here */}
+      {/**todays data ends here */}
           
       <Text>{search_value}</Text>
       </ScrollView>

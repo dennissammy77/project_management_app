@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text} from 'react-native';
+import { View, Text, TouchableOpacity} from 'react-native';
 import { Image } from 'expo-image';
 
 //utilities
 import ProgressBar from 'react-native-progress/Bar';
-import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 //assets
 
-const Project_Card = ({project}) => {
+const Project_Card = ({project,componentbg ,focus_bg,width, progress_bar_unfilled_bg}) => {
+    const navigation = useNavigation();
     //console.log(project)
     let [progressvalue,set_progressvalue]=useState(0);
     progressvalue = project?.progress/100;
@@ -18,12 +19,15 @@ const Project_Card = ({project}) => {
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
     return (
-        <View className='p-4 w-60 rounded-xl space-y-2 mr-2 bg-white'>
-            <View className='space-x-2 flex-row items-center'>
+        <View className='p-4 rounded-xl space-y-2 m-1' style={{backgroundColor:componentbg ,width:width}}>
+            <View className='space-x-2 flex-row items-center mb-2'>
                 <Text className='text-2xl font-bold text-secondary-color-2'>{project?.name}</Text>
             </View>
-            <View className='space-y-8'>
-                <Text className='text-[#37353D] text-xl h-20'>{project?.description}</Text>
+            <View className='space-x-2 flex-row items-center'>
+                <ProgressBar progress={progressvalue} width={175} color={focus_bg} animated={false} borderWidth={0} unfilledColor={progress_bar_unfilled_bg}/>
+                <Text className='font-bold text-secondary-color-2'>{project?.progress? project?.progress : 0}%</Text>
+            </View>
+            <View className='flex-row justify-between items-center'>
                 <View className='flex-row items-center -space-x-2'>
                     {project?.members?.slice(0,2).map((member,index)=>{
                         return(
@@ -42,16 +46,10 @@ const Project_Card = ({project}) => {
                     null
                     }
                 </View>
+                <TouchableOpacity onPress={(()=>{navigation.navigate('Project')})}>
+                    <Text className='font-medium text-white p-2 rounded-full' style={{backgroundColor:focus_bg}}>view details</Text>
+                </TouchableOpacity>
             </View>
-            <View className='space-x-2 flex-row items-center'>
-                <ProgressBar progress={progressvalue} width={175} color={'#714DD9'} animated={false} borderWidth={0} unfilledColor={'#e3e3e3'}/>
-                <Text className='font-bold text-secondary-color-2'>{project?.progress? project?.progress : 0}%</Text>
-            </View>
-            <View className='space-x-2 flex-row items-center'>
-                <AntDesign name="calendar" size={16} color="#232229" />
-                <Text className='font-medium text-secondary-color-2'>{project?.duedate? project?.duedate : '-'}</Text>
-            </View>
-            
         </View>
     )
   }
