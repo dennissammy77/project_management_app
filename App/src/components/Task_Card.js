@@ -10,7 +10,7 @@ import { AntDesign } from '@expo/vector-icons';
 const Task_Card = ({task}) => {
     let [progressvalue,set_progressvalue]=useState(0);
     progressvalue = task?.progress/100;
-    console.log(progressvalue)
+    //console.log(progressvalue)
 
     const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
@@ -19,18 +19,18 @@ const Task_Card = ({task}) => {
         <View className='p-4 w-full rounded-xl space-y-3 mr-2 bg-white mb-2'>
             <View className='items-center justify-between flex-row border-b-2 border-[#eee] pb-2'>
                 <View className='space-y-1'>
-                    <Text className='text-xl font-bold text-secondary-color-2 w-60'>{task?.title}</Text>
+                    <Text className='text-md font-bold text-secondary-color-2 w-60'>{task?.title}</Text>
                     <Text className='text-md font-light text-[#615F69]'>{task?.project_name}</Text>
                 </View>
                 <Progress.Pie progress={progressvalue} size={35} color={'#714DD9'}/>
             </View>
             <View className='flex-row justify-between items-center'>
                 <View className='space-y-2 '>
-                    <View className='space-x-2 flex-row'>
+                    <View className='space-x-2 flex-row items-center'>
                         <AntDesign name="clockcircleo" size={16} color="grey" />
-                        <Text>04-06-2023</Text>
+                        <Text className='text-xs'>04-06-2023</Text>
                     </View>
-                    <Text className='text-white font-semibold p-2 rounded-md w-20 bg-[#B399FF]'>In progress</Text>
+                    <Text className='text-white text-md font-semibold p-2 rounded-md w-30 bg-[#B399FF]'>In progress</Text>
                 </View>
                 <View className='space-y-2'>
                     <View className='flex-row items-center -space-x-2'>

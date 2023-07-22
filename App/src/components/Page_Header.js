@@ -24,7 +24,7 @@ const PageHeader = ({page_title}) => {
             }
             {page_title == 'project' ?
                 <View className='items-center justify-center bg-[#D9D9D9] border-2 border-[#fff] p-2 rounded-md'>
-                    <Text className='text-lg font-medium text-secondary-color-2'>mark as completed</Text>
+                    <Text className='text-md font-medium text-secondary-color-2'>mark as completed</Text>
                 </View>
                 :
                 null
