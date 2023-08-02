@@ -13,7 +13,7 @@ const PageHeader = ({page_title}) => {
         navigation.goBack();
     }
     return (
-        <View className='flex-row items-center align-middle w-full justify-between mt-6'>
+        <View className='flex-row items-center align-middle w-full justify-between mt-10 p-4'>
             <Ionicons name="arrow-back" size={24} color="black"  onPress={handleRouteToPreviousPage}/>
             {page_title == 'projects' ?
                 <View className='items-center justify-center bg-secondary-color-1 p-2 rounded-md'>
@@ -23,6 +23,11 @@ const PageHeader = ({page_title}) => {
                 null
             }
             {page_title == 'project' ?
+                <Text className='text-lg text-white rounded-md p-2 bg-secondary-color-1'>Add task</Text>
+                :
+                null
+            }
+            {page_title == 'task' ?
                 <View className='items-center justify-center bg-[#D9D9D9] border-2 border-[#fff] p-2 rounded-md'>
                     <Text className='text-md font-medium text-secondary-color-2'>mark as completed</Text>
                 </View>

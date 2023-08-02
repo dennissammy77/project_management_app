@@ -10,71 +10,73 @@ import { AntDesign } from '@expo/vector-icons';
 import Header from '../components/Header';
 import Project_Card from '../components/Project_Card';
 import Task_Card from '../components/Task_Card';
+import Footer from '../components/Footer';
 
 const HomeScreen = () => {
   const navigation =useNavigation();
   const [search_value,set_search_value]=useState('');
 
   return (
-    <SafeAreaView className="flex-1 justify-start bg-background-color-1 px-6 py-8 space-y-4 ">
+    <SafeAreaView className="flex-1 justify-start bg-background-color-1">
       <Header/>
-      <ScrollView showsVerticalScrollIndicator={false}>
-      <View className='space-y-1'>
-        <View className='w-full flex-row'>
-          <Text className='text-3xl text-secondary-color-1 font-semibold'>Hello,</Text>
-          <Text className='text-3xl text-secondary-color-2'> Sammy</Text>
-        </View>
-        <Text className='font-bold text-lg'>3 tasks are pending</Text>
-      </View>
-      {/**Search Component starts here*/}
-        <SearchComponent search_value={search_value} set_search_value={set_search_value}/>
-      {/**Search Component ends here*/}
-
-      {/**Projects data starts here */}
-      <View className='w-full space-y-2 '>
-        <View className='flex-row w-full justify-between items-center mt-4'>
-          <Text className='text-2xl font-medium text-secondary-color-2'>Projects</Text>
-          <Text className='text-sm font-medium text-secondary-color-2' onPress={(()=>{navigation.navigate("Projects")})}>see all</Text>
-        </View>
-        <ScrollView 
-          horizontal
-          className='flex-row space-x-2'
-          showsHorizontalScrollIndicator={false}
-        >
-          {projects?.map((project,index)=>{
-            return(
-              <Project_Card 
-                project={project} 
-                key={project?.id} 
-                componentbg={index%2 == 0 ? '#E9BB99' : '#C6B6F3'}
-                focus_bg={index%2 == 0 ? '#EB843A' : '#714DD9'}
-                progress_bar_unfilled_bg={'#FFFFFF'}
-                width={250}
-              />
-            )
-          })}
-        </ScrollView>
-      </View>
-      {/**Projects data ends here */}
-
-      {/**todays data starts here */}
-      <View className='w-full space-y-2 '>
-          <View className='flex-row w-full justify-between items-center mt-4'>
-            <Text className='text-2xl font-medium text-secondary-color-2'>Today tasks</Text>
-            <Text className='text-sm font-medium text-secondary-color-2'>see all</Text>
+      <ScrollView showsVerticalScrollIndicator={false} className='p-4'>
+        <View className='space-y-1'>
+          <View className='w-full flex-row'>
+            <Text className='text-3xl text-secondary-color-1 font-semibold'>Hello,</Text>
+            <Text className='text-3xl text-secondary-color-2'> Sammy</Text>
           </View>
-          <View>
-            {tasks?.map((task)=>{
+          <Text className='font-bold text-lg'>3 tasks are pending</Text>
+        </View>
+        {/**Search Component starts here*/}
+          <SearchComponent search_value={search_value} set_search_value={set_search_value}/>
+        {/**Search Component ends here*/}
+
+        {/**Projects data starts here */}
+        <View className='w-full space-y-2 '>
+          <View className='flex-row w-full justify-between items-center mt-4'>
+            <Text className='text-2xl font-medium text-secondary-color-2'>Projects</Text>
+            <Text className='text-sm font-medium text-secondary-color-2' onPress={(()=>{navigation.navigate("Projects")})}>see all</Text>
+          </View>
+          <ScrollView 
+            horizontal
+            className='flex-row space-x-2'
+            showsHorizontalScrollIndicator={false}
+          >
+            {projects?.map((project,index)=>{
               return(
-                <Task_Card task={task} key={task?.id}/>
+                <Project_Card 
+                  project={project} 
+                  key={project?.id} 
+                  componentbg={index%2 == 0 ? '#E9BB99' : '#C6B6F3'}
+                  focus_bg={index%2 == 0 ? '#EB843A' : '#714DD9'}
+                  progress_bar_unfilled_bg={'#FFFFFF'}
+                  width={250}
+                />
               )
             })}
-          </View>
-      </View>
-      {/**todays data ends here */}
-          
-      <Text>{search_value}</Text>
+          </ScrollView>
+        </View>
+        {/**Projects data ends here */}
+
+        {/**todays data starts here */}
+        <View className='w-full space-y-2 '>
+            <View className='flex-row w-full justify-between items-center mt-4'>
+              <Text className='text-2xl font-medium text-secondary-color-2'>Today tasks</Text>
+              <Text className='text-sm font-medium text-secondary-color-2'>see all</Text>
+            </View>
+            <View>
+              {tasks?.map((task)=>{
+                return(
+                  <Task_Card task={task} key={task?.id}/>
+                )
+              })}
+            </View>
+        </View>
+        {/**todays data ends here */}
+            
+        <Text>{search_value}</Text>
       </ScrollView>
+      <Footer/>
     </SafeAreaView>
   )
 }
